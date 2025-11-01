@@ -5,7 +5,8 @@
   "parts": [
     { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
     { "type": "wokwi-dht22", "id": "dht1", "top": -86.1, "left": -149.4, "attrs": {} },
-    { "type": "wokwi-gas-sensor", "id": "gas1", "top": 213.9, "left": -223.4, "attrs": {} }
+    { "type": "wokwi-gas-sensor", "id": "gas1", "top": 213.9, "left": -223.4, "attrs": {} },
+    { "type": "wokwi-led", "id": "led1", "top": 25.2, "left": 157.4, "attrs": { "color": "red" } }
   ],
   "connections": [
     [ "esp:TX", "$serialMonitor:RX", "", [] ],
@@ -15,7 +16,9 @@
     [ "gas1:VCC", "esp:5V", "red", [ "h0" ] ],
     [ "gas1:GND", "esp:GND.1", "black", [ "h0" ] ],
     [ "dht1:GND", "esp:GND.1", "black", [ "v0" ] ],
-    [ "gas1:AOUT", "esp:34", "green", [ "h0" ] ]
+    [ "gas1:AOUT", "esp:34", "green", [ "h0" ] ],
+    [ "esp:2", "led1:A", "green", [ "h0" ] ],
+    [ "led1:C", "esp:GND.2", "green", [ "v0" ] ]
   ],
   "dependencies": {}
 }
