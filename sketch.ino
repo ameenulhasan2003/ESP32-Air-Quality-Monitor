@@ -5,17 +5,13 @@
 
 DHT dht(14, DHT22);
 
-// WOKWI default WIFI
 char* ssid = "Wokwi-GUEST";
 char* password = "";
-
 unsigned long myChannelNumber = 3142270;
 const char* myWriteAPIKey   = "O1EFTOO9MWL8BCL7";
-
 WiFiClient client;
-
-// MQ Analog input
 int MQ_PIN = 34;
+int LED_PIN = 2;
 
 float Temperature;
 float Humidity;
@@ -24,6 +20,8 @@ int AirQualityRaw;
 void setup() {
   Serial.begin(115200);
   dht.begin();
+  pinMode(LED_PIN, OUTPUT);
+digitalWrite(LED_PIN, LOW);
 
   pinMode(MQ_PIN, INPUT);
 
@@ -59,6 +57,12 @@ void loop() {
 
   Serial.print("AirQualityRaw: ");
   Serial.println(AirQualityRaw);
+  if (AirQualityRaw > 3627) {
+  digitalWrite(LED_PIN, HIGH); 
+  Serial.println("WARNING! Air Quality High");
+} else {
+  digitalWrite(LED_PIN, LOW); 
+}
 
   ThingSpeak.setField(1, Temperature);
   ThingSpeak.setField(2, Humidity);
